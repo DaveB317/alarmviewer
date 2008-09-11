@@ -72,7 +72,7 @@ var updateFetchStatus = function(x){
 var fakeReport = function(percent){
 	// FIXME: can't set a label on an indeterminate progress bar
 	// like if(this.indeterminate) { return " connecting."; }
-	return dojo.string.substitute("Fetching: ${0} of ${1} messages.", [percent * this.maximum, this.maximum]);
+	return dojo.string.substitute("Fetching: ${0} of ${1} messages", [percent * this.maximum, this.maximum]);
 }
 
 var fakeDownload = function(){

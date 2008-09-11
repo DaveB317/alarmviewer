@@ -4,7 +4,7 @@
 <head>
 	<title>Demo Mail Application</title>
 
-	<link rel="stylesheet" href="demo.css">
+	<link rel="stylesheet" href="alarm.css">
 
 	<script type="text/javascript" src="http://o.aolcdn.com/dojo/1.1.1/dojo/dojo.js" charset="utf-8"></script>
 	<script type="text/javascript" src="src.js" charset="utf-8"></script>
@@ -12,7 +12,7 @@
 </head>
 <body class="soria">
 	<div id="preLoader"><p></p></div>
-	<div dojoType="dojo.data.ItemFileWriteStore" jsId="mailStore"
+	<div dojoType="dojo.data.ItemFileWriteStore" jsId="alarmStore"
 		url="mail.json"></div>
 
 	<!-- Inline declaration of a table widget (thanks Alex!) -->
@@ -204,7 +204,7 @@
 			<div dojoType="dijit.layout.BorderContainer" id="inbox" title="Inbox" design="sidebar">
 				<div dojoType="dijit.layout.AccordionContainer" region="leading" minSize="20" style="width:20%;" splitter="true">
 					<div dojoType="dijit.layout.AccordionPane" title="Folders">
-						<div dojoType="dijit.Tree" id="mytree" store="mailStore"
+						<div dojoType="dijit.Tree" id="mytree" store="alarmStore"
 							childrenAttr="folders" query="{type:'folder'}" label="Folders">
 							<script type="dojo/method" event="onClick" args="item">
 								if(!item){
@@ -213,17 +213,17 @@
 								/* filter the message list to messages in this folder */
 								table.query.query = {
 									type: "message",
-									folder: mailStore.getValue(item, "id")
+									folder: alarmStore.getValue(item, "id")
 								};
 								table.runQuery();
 							</script>
 							<script type="dojo/method" event="getIconClass" args="item">
-								return (item && mailStore.getValue(item, "icon")) || "mailIconFolderDocuments";
+								return (item && alarmStore.getValue(item, "icon")) || "mailIconFolderDocuments";
 							</script>
 						</div>
 					</div>
 					<div dojoType="dijit.layout.AccordionPane" title="Address Book">
-						<span dojoType="demo.Table" store="mailStore"
+						<span dojoType="demo.Table" store="alarmStore"
 							query="{ query: { type: 'address' }, columns: [ {name: 'User name', attribute: 'label'} ], sort: [ { attribute: 'label' } ]  }"
 							id="addresses" style="width: 100%">
 							<script type="dojo/method" event="preamble">
@@ -236,7 +236,7 @@
 								];
 							</script>
 							<script type="dojo/method" event="onClick" args="item">
-								table.query.query.sender = mailStore.getValue(item, "sender");
+								table.query.query.sender = alarmStore.getValue(item, "sender");
 								delete table.query.query.folder;
 								table.runQuery();
 							</script>
@@ -246,7 +246,7 @@
 
 				<!-- list of messages pane -->
 				<div id="listPane" dojoType="dijit.layout.ContentPane" region="top" minSize="20" style="height:134px;" splitter="true">
-					<span dojoType="demo.Table" store="mailStore"
+					<span dojoType="demo.Table" store="alarmStore"
 						query="{ query: { type: 'message' }, sort: [ { attribute: 'label' } ]  }"
 						id="foo" jsId="table" style="width: 100%">
 						<script type="dojo/method" event="onClick" args="item">
@@ -293,7 +293,7 @@
 		</div> <!-- end of TabContainer -->
 
 		<div dojoType="dijit.layout.ContentPane" region="bottom" id="footer" align="left">
-			<span style="float:right;">DojoMail v1.0 (demo only)</span>
+			<span style="float:right;">Alarm v0.0.1 (demo only)</span>
 			<div id="fetchMail" style="opacity:0;visibility:hidden">
 				<div id="fakeFetch" dojoType="dijit.ProgressBar" style="height:15px; width:275px;" indeterminate="true" report="fakeReport"></div>
 			</div>
