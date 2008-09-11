@@ -26,6 +26,9 @@ dojo.require("dijit.layout.AccordionContainer");
 dojo.require("dijit.layout.TabContainer");
 dojo.require("dijit.layout.ContentPane");
 
+dojo.require("dojox.grid.Grid");
+
+
 dojo.addOnLoad(function(){
 
 	dojo.parser.parse();
